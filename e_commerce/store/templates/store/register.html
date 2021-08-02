@@ -1,0 +1,40 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block body %}
+<div class="form-styling">
+<h1>Register</h1>
+<hr>
+<form method="POST" action="">
+    {% csrf_token %}
+    Username :
+    {{form.username}}
+    <br><br>
+    First name :
+    {{form.first_name}}
+    <br><br>
+    Last name :
+    {{form.last_name}}
+    <br><br>
+    Email :
+    {{form.email}}
+    <br><br>
+    Password :
+    {{form.password1}}
+    <br><br>
+    Confirm password :
+    {{form.password2}}
+    <br>
+    <hr>
+    {% if form.errors %}
+        {{form.errors.as_data}}
+    {% endif %}
+    <hr>
+    <input type="submit" class="btn btn-success" value="Submit">
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block body %}
+<br>
+<h2>Cart</h2>
+<hr>
+
+<div class="row">
+
+    <div class="col-lg-9">
+        <div class="box-element">
+            <div class="cart-row-header" style="text-align: center">
+                <div class="cart-table-border" style="flex:2"><strong>Image</strong></div>
+                <div class="cart-table-border" style="flex:2"><strong>Item</strong></div>
+                <div class="cart-table-border" style="flex:1"><strong>Price</strong></div>
+                <div class="cart-table-border" style="flex:1"><strong>Quantity</strong></div>
+                <div style="flex:1"><strong>Total</strong></div>
+            </div>
+            <hr>
+            {% for order_item in order_items %}
+
+            <div class="cart-row" style="text-align: center">
+                <div class="cart-table-border" style="flex:2"><img style="width: 130px; height: 80px;" src="{{order_item.product.imageURL}}"></div>
+                <div class="cart-table-border" style="flex:2">{{order_item.product.name}}</div>
+                <div class="cart-table-border" style="flex:1">$ {{order_item.product.price|floatformat:2}}</div>
+                <div class="cart-table-border" style="flex:1">
+                    <a style="float: left" href="{% url 'update_item' pk=order_item.product.id update_action=0 current_page=2 %}">
+                        <svg style="border: thin solid #c9c4c3; border-radius: 5px; margin: 5px; padding: 3px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                        <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
+                        </svg>
+                    </a>
+                    {{order_item.quantity}}
+                    <a style="float: right" href="{% url 'update_item' pk=order_item.product.id update_action=1 current_page=2 %}">
+                        <svg style="border: thin solid #c9c4c3; border-radius: 5px; margin: 5px; padding: 3px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div style="flex:1">$ {{order_item.get_total|floatformat:2}}</div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="box-element">
+            <h4 style="padding: 5px">Items : {{total_items}}</h4>
+            <h4 style="padding: 5px">Total : $ {{total_amount|floatformat:2}}</h4>
+            <hr>
+            <a href="{% url 'store' %}" class="btn btn-outline-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                Back
+            </a>
+            <a href="{% url 'checkout' %}" class="btn btn-outline-success" style="float: right">
+                Checkout
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+</div>
+<br><br><br><br>
+{% endblock %}

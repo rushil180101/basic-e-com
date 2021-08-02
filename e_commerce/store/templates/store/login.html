@@ -1,0 +1,32 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block body %}
+<div class="form-styling">
+<h1>Login</h1>
+<hr>
+{% for message in messages %}
+    <p style="color: green"><strong>{{message}}</strong></p>
+    <hr>
+{% endfor %}
+<form method="POST" action="">
+    {% csrf_token %}
+
+    Username :
+    <input type="text" name="username">
+    <br><br>
+
+    Password :
+    <input type="password" name="password">
+
+    <br>
+    <hr>
+    <input type="submit" class="btn btn-success" value="Login">
+</form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,20 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}
+View
+{% endblock %}
+
+{% block body %}
+<div class="form-styling">
+    <h3>Details</h3>
+    <hr>
+    Name : {{product.name}}
+    <br><br>
+    Price : $ {{product.price|floatformat:2}}
+    <br><br>
+    Digital : {{product.digital}}
+    <br><br>
+    Image : <a href="{{product.imageURL}}">{{product.imageURL}}</a>
+</div>
+{% endblock %}

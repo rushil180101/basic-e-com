@@ -1,0 +1,42 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}
+Store
+{% endblock %}
+
+{% block body %}
+<br>
+{% for message in messages %}
+<h3 style="color: red">{{message}}</h3>
+<br>
+{% endfor %}
+<h2>Store</h2>
+<hr>
+
+<div class="row">
+
+    {% for product in products %}
+
+    <div class="col-lg-4">
+        <img class="thumbnail" src="{{product.imageURL}}">
+        <div class="box-element product">
+            <strong>{{product.name}}</strong>
+            <hr>
+            <a href="{% url 'update_item' pk=product.id update_action=1 current_page=1 %}" class="btn btn-outline-primary">Add to cart</a>
+            <a href="{% url 'view_product' product.id %}" class="btn btn-outline-success">View</a>
+            <h4 style="display: inline; float: right; margin-right:10px;">$ {{product.price|floatformat:2}}</h4>
+        </div>
+    </div>
+
+    {% if forloop.counter|divisibleby:3 %}
+    <br><br>
+    <hr>
+    {% endif %}
+
+    {% endfor %}
+
+</div>
+<br><br><br><br>
+
+{% endblock %}
